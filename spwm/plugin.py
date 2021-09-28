@@ -27,7 +27,7 @@ class SpwmPlugin(BasePlugin):
         # check signatures and headers.
         if path == '/get-token/':
             # do something with the request
-            data = request.data
+            data = request.GET
             open_id = OpenidUtils(data["code"]).get_openid()
             user, _ = User.objects.get_or_create(email=f"wx_{open_id}")
             token = signer.sign(user.id)
@@ -47,8 +47,8 @@ class SpwmPlugin(BasePlugin):
 class OpenidUtils(object):
     def __init__(self, jscode):
         self.url = "https://api.weixin.qq.com/sns/jscode2session"
-        self.appid = os.environ.get('WX_MP_APPID')
-        self.secret = os.environ.get('WX_MP_APPSECRET')
+        self.appid = os.environ.get('WX_MP_APPID', "")
+        self.secret = os.environ.get('WX_MP_APPSECRET', "")
         self.jscode = jscode
 
     def get_openid(self):
