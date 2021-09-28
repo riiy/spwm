@@ -48,7 +48,7 @@ class OpenidUtils(object):
     def __init__(self, jscode):
         self.url = "https://api.weixin.qq.com/sns/jscode2session"
         self.appid = os.environ.get('WX_MP_APPID')
-        self.secret = os.environ.get'WX_MP_APPSECRET')
+        self.secret = os.environ.get('WX_MP_APPSECRET')
         self.jscode = jscode
 
     def get_openid(self):
