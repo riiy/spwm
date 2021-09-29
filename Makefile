@@ -75,7 +75,10 @@ docs: ## generate Sphinx HTML documentation, including API docs
 servedocs: docs ## compile the docs watching for changes
 	watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
 
-release: dist ## package and upload a release
+push: ## push origin
+	git push origin main
+
+release: push dist ## package and upload a release
 	twine upload dist/*
 
 dist: clean ## builds source and wheel package

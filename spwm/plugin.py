@@ -14,6 +14,9 @@ from saleor.core.auth import get_token_from_request
 
 User = get_user_model()
 signer = Signer()
+format = "%(asctime)s %(name)-20s %(funcName)s %(lineno)d: %(levelname)-8s: %(message)s"
+logging.basicConfig(format=format, force=True, level=logging.ERROR)
+logger = logging.getLogger(__name__)
 
 
 class SpwmPlugin(BasePlugin):
@@ -38,8 +41,14 @@ class SpwmPlugin(BasePlugin):
     def authenticate_user(self, request: WSGIRequest, previous_value) -> Optional["User"]:
         """."""
 
-        token = get_token_from_request(request)
-        uid = signer.unsign(token)
+        try:
+            token = get_token_from_request(request)
+            logger.error(token)
+            uid = signer.unsign(token)
+            logger.error(uid)
+        except Exception as e:
+            logger.error(e)
+            return None
         user = User.objects.get(uid)
         return user
 
