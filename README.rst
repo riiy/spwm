@@ -17,7 +17,7 @@ spwm
 
 
 Saleor Plugin for Wechat Miniprogram
-
+Saleor商城的微信小程序插件
 
 * Free software: GNU General Public License v3
 * Documentation: https://spwm.readthedocs.io.
@@ -26,7 +26,8 @@ Saleor Plugin for Wechat Miniprogram
 Features
 --------
 
-* TODO
+* 微信小程序通过open_id自动登录
+* TODO 订单使用微信支付
 
 Credits
 -------
