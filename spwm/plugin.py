@@ -17,7 +17,7 @@ signer = Signer()
 
 
 class SpwmPlugin(BasePlugin):
-    """."""
+    """微信小程相关."""
 
     PLUGIN_ID = "riiy.spwm"
     PLUGIN_NAME = "spwm"
@@ -29,7 +29,7 @@ class SpwmPlugin(BasePlugin):
             # do something with the request
             data = request.GET
             open_id = OpenidUtils(data["code"]).get_openid()
-            user, _ = User.objects.get_or_create(email=f"wx_{open_id}")
+            user, _ = User.objects.get_or_create(first_name="wx_mp", last_name=open_id)
             token = signer.sign(user.id)
             return JsonResponse(data={"token": token})
 
